@@ -26,14 +26,14 @@ function OrderModal({ pkg, onClose }: { pkg: string; onClose: () => void }) {
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
-    if (fd.website) return setState("done"); // honeypot
+    if (fd["website"]) return setState("done"); // honeypot
     const r = orderSchema.safeParse(fd);
     if (!r.success) {
       setErrors(Object.fromEntries(r.error.issues.map((i) => [String(i.path[0]), i.message])));
       return;
     }
     setErrors({}); setState("sending");
-    const { error } = await supabase.from("orders").insert(r.data);
+    const { error } = await supabase.from("orders").insert({ name: r.data.name, email: r.data.email, package: r.data.package, book_title: r.data.book_title ?? null, genre: r.data.genre ?? null, message: r.data.message ?? null });
     if (error) { setState("error"); setMsg(error.message.includes("Too many") ? "Too many requests. Please wait a few minutes." : "Something went wrong. Please try again."); }
     else setState("done");
   }

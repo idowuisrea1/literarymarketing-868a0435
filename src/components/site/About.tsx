@@ -12,7 +12,7 @@ export function About() {
         <Reveal className="relative mx-auto w-full max-w-md">
           <div className="absolute inset-[10%] rounded-full bg-gold/25 blur-3xl" />
           <div className="relative animate-float">
-            <img src={a.founder} alt="Idowu Isreal Agboola, founder of literarymarketing, in a navy double-breasted suit" loading="lazy" width={900} height={1350}
+            <img src={a["founder"]} alt="Idowu Isreal Agboola, founder of literarymarketing, in a navy double-breasted suit" loading="lazy" width={900} height={1350}
               className="relative w-full [mask-image:radial-gradient(70%_65%_at_50%_42%,#000_55%,transparent_100%)]" />
           </div>
           {[{ i: BookOpen, t: "50+", l: "Books promoted" }, { i: Users, t: "30+", l: "Authors served" }, { i: Award, t: "5★", l: "Avg. rating" }].map((b, k) => (

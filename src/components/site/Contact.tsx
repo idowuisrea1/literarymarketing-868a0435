@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, MessageCircle, Phone, Instagram, Linkedin, Youtube, Twitter, Music2 } from "lucide-react";
+import { CheckCircle2, MessageCircle, Phone, Camera as Instagram, Briefcase as Linkedin, PlayCircle as Youtube, AtSign as Twitter, Music2 } from "lucide-react";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/pf/logo.png.asset.json";
@@ -23,11 +23,11 @@ export function Contact() {
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
-    if (fd.website) return setState("done");
+    if (fd["website"]) return setState("done");
     const r = leadSchema.safeParse(fd);
     if (!r.success) { setErrors(Object.fromEntries(r.error.issues.map((i) => [String(i.path[0]), i.message]))); return; }
     setErrors({}); setState("sending");
-    const { error } = await supabase.from("leads").insert(r.data);
+    const { error } = await supabase.from("leads").insert({ name: r.data.name, email: r.data.email, genre: r.data.genre ?? null, service: r.data.service ?? null, details: r.data.details ?? null });
     setState(error ? "error" : "done");
   }
 
@@ -55,8 +55,8 @@ export function Contact() {
           ) : (
             <form onSubmit={submit} noValidate className="grid gap-3 sm:grid-cols-2">
               <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
-              <div><input name="name" placeholder="Your name" aria-label="Your name" maxLength={120} className={fieldCls} />{errors.name && <p className="mt-1 text-xs text-destructive">{errors.name}</p>}</div>
-              <div><input name="email" type="email" placeholder="Email address" aria-label="Email" maxLength={255} className={fieldCls} />{errors.email && <p className="mt-1 text-xs text-destructive">{errors.email}</p>}</div>
+              <div><input name="name" placeholder="Your name" aria-label="Your name" maxLength={120} className={fieldCls} />{errors["name"] && <p className="mt-1 text-xs text-destructive">{errors["name"]}</p>}</div>
+              <div><input name="email" type="email" placeholder="Email address" aria-label="Email" maxLength={255} className={fieldCls} />{errors["email"] && <p className="mt-1 text-xs text-destructive">{errors["email"]}</p>}</div>
               <select name="genre" defaultValue="" aria-label="Book genre" className={fieldCls}><option value="" disabled>Book genre</option>{GENRES.map((g) => <option key={g}>{g}</option>)}</select>
               <select name="service" defaultValue="" aria-label="Service needed" className={fieldCls}><option value="" disabled>Service needed</option>{SERVICES_LIST.map((g) => <option key={g}>{g}</option>)}</select>
               <textarea name="details" rows={5} placeholder="Tell us about your book and goals" aria-label="Project details" maxLength={3000} className={`${fieldCls} sm:col-span-2`} />
