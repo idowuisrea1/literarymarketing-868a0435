@@ -27,7 +27,7 @@ const TABS = [
 
 export function Services() {
   const [tab, setTab] = useState(0);
-  const t = TABS[tab];
+  const t = TABS[tab]!;
   return (
     <section id="services" className="relative px-5 py-24">
       <SectionHead eyebrow="01 · Services" title={<>Three ways we <span className="text-gold-gradient">grow your readers</span></>} sub="Pick one service or combine them all. We handle the tech, you keep writing." />
