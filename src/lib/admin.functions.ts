@@ -4,7 +4,7 @@ import { z } from "zod";
 export const getAdminData = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => z.object({ password: z.string().min(1).max(200) }).parse(d))
   .handler(async ({ data }) => {
-    const expected = process.env.ADMIN_PASSWORD;
+    const expected = process.env["ADMIN_PASSWORD"];
     if (!expected || data.password !== expected) {
       return { ok: false as const, leads: [], orders: [], subscribers: [] };
     }

@@ -79,7 +79,7 @@ const TESTIMONIALS = [
 export function Results() {
   const [i, setI] = useState(0);
   useEffect(() => { const t = setInterval(() => setI((x) => (x + 1) % TESTIMONIALS.length), 5000); return () => clearInterval(t); }, []);
-  const t = TESTIMONIALS[i];
+  const t = TESTIMONIALS[i]!;
   return (
     <section id="results" className="px-5 py-24">
       <SectionHead eyebrow="04 · Results" title={<>What growth <span className="text-gold-gradient">looks like</span></>} sub="A sample campaign dashboard, so you can see what we track for you." />
