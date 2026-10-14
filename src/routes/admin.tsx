@@ -29,7 +29,7 @@ function Table({ rows, cols }: { rows: Record<string, unknown>[]; cols: string[]
       <table className="w-full text-left text-sm">
         <thead className="bg-card"><tr>{cols.map((c) => <th key={c} className="px-3 py-2 font-mono text-xs uppercase text-gold">{c.replace("_", " ")}</th>)}</tr></thead>
         <tbody>{rows.map((r) => (
-          <tr key={String(r.id)} className="border-t align-top">{cols.map((c) => (
+          <tr key={String(r["id"])} className="border-t align-top">{cols.map((c) => (
             <td key={c} className="max-w-xs whitespace-pre-wrap px-3 py-2">{c === "created_at" ? new Date(String(r[c])).toLocaleString() : String(r[c] ?? "")}</td>
           ))}</tr>
         ))}</tbody>
