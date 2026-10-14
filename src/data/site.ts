@@ -37,7 +37,7 @@ export const ORDER_OPTIONS = [...PACKAGES.map((p) => p.name), "Custom quote: Aut
 export type Category = "Book Trailers" | "BookTok" | "Book Spotlights" | "Mockups" | "Cover Design" | "Content Design";
 export const CATEGORIES: ("All" | Category)[] = ["All", "Book Trailers", "BookTok", "Book Spotlights", "Mockups", "Cover Design", "Content Design"];
 
-export type Work = { id: string; title: string; cat: Category; img?: string; youtube?: string };
+export type Work = { id: string; title: string; cat: Category; img?: string | undefined; youtube?: string };
 
 const yt = (id: string, title: string): Work => ({ id: `yt-${id}`, title, cat: "Book Trailers", youtube: id });
 
