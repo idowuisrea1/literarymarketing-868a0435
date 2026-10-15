@@ -1,18 +1,8 @@
 // ✏️ Edit everything here: prices, links, contact details, portfolio.
 import a from "@/assets/pf";
 
-export const CONTACT = {
-  whatsapp: "https://wa.me/2340000000000", // TODO: replace with real WhatsApp number
-  calendly: "https://calendly.com/literarymarketing/strategy-call", // placeholder
-  email: "hello@literarymarketing.com", // placeholder
-  socials: {
-    instagram: "https://instagram.com/",
-    tiktok: "https://tiktok.com/",
-    x: "https://x.com/",
-    linkedin: "https://linkedin.com/",
-    youtube: "https://youtube.com/",
-  },
-};
+import { CONTACT, ONE_TIME, TRAILERS } from "@/config/site";
+export { CONTACT, ONE_TIME };
 
 export type Pkg = { id: string; name: string; price: string; period: string; tagline: string; features: string[]; popular?: boolean };
 export const PACKAGES: Pkg[] = [
@@ -32,25 +22,17 @@ export const PACKAGES: Pkg[] = [
     features: ["Daily content on all platforms", "Launch & pre-order campaigns", "ARC review mechanics", "Author website included", "Cover design or redesign", "Priority support"],
   },
 ];
-export const ORDER_OPTIONS = [...PACKAGES.map((p) => p.name), "Custom quote: Author Website", "Custom quote: Other"];
+export const ORDER_OPTIONS = [...PACKAGES.map((p) => p.name), ...ONE_TIME.map((o) => o.name), "Custom quote: Other"];
 
 export type Category = "Book Trailers" | "BookTok" | "Book Spotlights" | "Mockups" | "Cover Design" | "Content Design";
 export const CATEGORIES: ("All" | Category)[] = ["All", "Book Trailers", "BookTok", "Book Spotlights", "Mockups", "Cover Design", "Content Design"];
 
-export type Work = { id: string; title: string; cat: Category; img?: string | undefined; youtube?: string };
+export type Work = { id: string; title: string; cat: Category; img?: string | undefined; youtube?: string; author?: string };
 
-const yt = (id: string, title: string): Work => ({ id: `yt-${id}`, title, cat: "Book Trailers", youtube: id });
+const ytId = (u: string) => u.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/)?.[1] ?? "";
 
 export const WORKS: Work[] = [
-  yt("6MgL7enCGmI", "Book Trailer · Short"),
-  yt("AhmJbAvhueE", "Book Trailer I"),
-  yt("hleTcjUmxoc", "Book Trailer II"),
-  yt("8DG3n8wUXXA", "Book Trailer III"),
-  yt("CPG-2ALbUdA", "Book Trailer IV"),
-  yt("fW3HKIWwm5U", "Book Trailer V"),
-  yt("IHIBFc3lX6A", "Book Trailer VI"),
-  yt("zyRxyaa8K3A", "Book Trailer VII"),
-  yt("sd6xmk9LYpI", "Book Trailer VIII"),
+  ...TRAILERS.map((t, i): Work => ({ id: `yt-${i}`, title: t.title, author: t.author, cat: "Book Trailers", youtube: ytId(t.url) })),
   { id: "sp1", title: "Mały Przyjaciel", cat: "Book Spotlights", img: a["sp-maly"] },
   { id: "sp2", title: "Eddie", cat: "Book Spotlights", img: a["sp-eddie"] },
   { id: "sp3", title: "Memoirs of a Time Traveler", cat: "Book Spotlights", img: a["sp-memoirs"] },
@@ -91,4 +73,5 @@ export const FAQS = [
 ];
 
 export const GENRES = ["Fantasy", "Romance", "Thriller / Mystery", "Sci-Fi", "Horror", "Literary Fiction", "Young Adult", "Children's", "Non-Fiction / Memoir", "Christian / Faith", "Other"];
-export const SERVICES_LIST = ["Social Media Management", "Automated Email Marketing", "Author Website", "Book Trailer / BookTok", "Cover Design / Mockups", "Full Package"];
+export const SERVICE_CATEGORIES = ["Amazon & Goodreads Growth", "Social Media Management & Content", "Video That Sells Books", "Email Marketing", "Author Websites & Landing Pages", "Website Audit, SEO & Optimization", "Graphic & Cover Design", "Ads & Promotion"];
+export const SERVICES_LIST = [...SERVICE_CATEGORIES, "Full Package"];
