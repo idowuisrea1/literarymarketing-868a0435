@@ -83,7 +83,7 @@ export function Pricing() {
   const [pkg, setPkg] = useState<string | null>(null);
   return (
     <section id="pricing" className="px-5 py-24">
-      <SectionHead eyebrow="05 · Pricing" title={<>Simple, <span className="text-gold-gradient">transparent</span> plans</>} sub="Monthly packages. No long contracts. Cancel anytime." />
+      <SectionHead eyebrow="Pricing" title={<>Simple, <span className="text-gold-gradient">transparent</span> plans</>} sub="Monthly packages. No long contracts. Cancel anytime." />
       <div className="mx-auto grid max-w-6xl items-stretch gap-6 lg:grid-cols-3">
         {PACKAGES.map((p, i) => (
           <Reveal key={p.id} delay={i * 0.1} className="h-full">

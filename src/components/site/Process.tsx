@@ -13,7 +13,7 @@ const STEPS = [
 export function Process() {
   return (
     <section id="process" className="px-5 py-24">
-      <SectionHead eyebrow="03 · How it works" title={<>Three steps. <span className="text-gold-gradient">Zero stress.</span></>} sub="From first chat to a growing readership in about a week." />
+      <SectionHead eyebrow="How it works" title={<>Three steps. <span className="text-gold-gradient">Zero stress.</span></>} sub="From first chat to a growing readership in about a week." />
       <div className="relative mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
         <div className="absolute left-[16%] right-[16%] top-12 hidden h-px md:block">
           <motion.div className="h-full origin-left bg-gold-gradient" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 1.4, ease: "easeInOut" }} />
@@ -82,7 +82,7 @@ export function Results() {
   const t = TESTIMONIALS[i]!;
   return (
     <section id="results" className="px-5 py-24">
-      <SectionHead eyebrow="04 · Results" title={<>What growth <span className="text-gold-gradient">looks like</span></>} sub="A sample campaign dashboard, so you can see what we track for you." />
+      <SectionHead eyebrow="Results" title={<>What growth <span className="text-gold-gradient">looks like</span></>} sub="A sample campaign dashboard, so you can see what we track for you." />
       <div className="mx-auto max-w-6xl">
         <p className="mb-4 text-center font-mono text-[11px] uppercase tracking-[0.25em] text-muted-foreground">⚠ Sample campaign dashboard · illustrative numbers, not client results</p>
         <div className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 lg:grid-cols-4">

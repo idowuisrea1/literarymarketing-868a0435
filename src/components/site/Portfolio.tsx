@@ -42,7 +42,7 @@ export function Portfolio() {
 
   return (
     <section id="portfolio" className="px-5 py-24">
-      <SectionHead eyebrow="02 · Portfolio" title={<>Work That <span className="text-gold-gradient">Sells Books</span></>} sub="Real trailers, spotlights, mockups and covers we made for authors." />
+      <SectionHead eyebrow="Portfolio" title={<>Work We Made <span className="text-gold-gradient">for Authors</span></>} sub="Selected creative work for authors." />
       <Reveal className="mx-auto mb-10 flex max-w-5xl gap-2 overflow-x-auto pb-2 sm:flex-wrap sm:justify-center">
         {CATEGORIES.map((c) => (
           <button key={c} onClick={() => setCat(c)}

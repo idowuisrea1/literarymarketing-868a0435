@@ -30,7 +30,7 @@ export function Services() {
   const t = TABS[tab]!;
   return (
     <section id="services" className="relative px-5 py-24">
-      <SectionHead eyebrow="01 · Services" title={<>Three ways we <span className="text-gold-gradient">grow your readers</span></>} sub="Pick one service or combine them all. We handle the tech, you keep writing." />
+      <SectionHead eyebrow="Services" title={<>Three ways we <span className="text-gold-gradient">grow your readers</span></>} sub="Pick one service or combine them all. We handle the tech, you keep writing." />
       <Reveal className="mx-auto max-w-6xl">
         <div role="tablist" className="mx-auto mb-8 grid max-w-3xl gap-2 sm:grid-cols-3">
           {TABS.map((x, i) => (

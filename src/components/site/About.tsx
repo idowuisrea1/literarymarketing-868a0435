@@ -42,7 +42,7 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
     <section id="faq" className="px-5 py-24">
-      <SectionHead eyebrow="07 · FAQ" title={<>Questions, <span className="text-gold-gradient">answered</span></>} sub="Everything authors usually ask before we start." />
+      <SectionHead eyebrow="FAQ" title={<>Questions, <span className="text-gold-gradient">answered</span></>} sub="Everything authors usually ask before we start." />
       <div className="mx-auto max-w-3xl space-y-3">
         {FAQS.map((f, i) => (
           <Reveal key={f.q} delay={i * 0.04}>
