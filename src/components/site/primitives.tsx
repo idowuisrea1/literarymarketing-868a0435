@@ -23,7 +23,7 @@ export function SectionHead({ eyebrow, title, sub }: { eyebrow: string; title: R
       <p className="font-mono text-xs uppercase tracking-[0.3em] text-cyan">{eyebrow}</p>
       <h2 className="mt-3 text-4xl font-semibold leading-tight sm:text-5xl md:text-6xl">{title}</h2>
       <p className="mt-4 text-base text-muted-foreground sm:text-lg">{sub}</p>
-      <div className="hairline mx-auto mt-6 w-40" />
+      <motion.div className="hairline mx-auto mt-6 w-40 origin-center" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }} />
     </Reveal>
   );
 }
@@ -68,4 +68,10 @@ export function Tilt({ children, className, max = 10 }: { children: ReactNode; c
 
 export function scrollToId(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+}
+
+/** Scroll to the contact form and pre-select a service. */
+export function openQuote(service: string) {
+  window.dispatchEvent(new CustomEvent("lm:service", { detail: service }));
+  scrollToId("contact");
 }
