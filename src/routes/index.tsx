@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
-import { Services } from "@/components/site/Services";
+import { Services, AllServices } from "@/components/site/Services";
 import { Portfolio } from "@/components/site/Portfolio";
 import { Process, Results } from "@/components/site/Process";
 import { Pricing } from "@/components/site/Pricing";
 import { About, FAQ } from "@/components/site/About";
+import { WhyUs, CaseStudy, LeadMagnet, LogoLoader } from "@/components/site/Extras";
 import { Contact, Footer, FloatingBars } from "@/components/site/Contact";
 
 const TITLE = "literarymarketing — Book Marketing for Authors & Publishers";
@@ -28,16 +29,21 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="grain relative">
+      <LogoLoader />
       <Header />
       <main>
         <Hero />
+        <WhyUs />
         <Services />
+        <AllServices />
         <Portfolio />
+        <CaseStudy />
         <Process />
         <Results />
         <Pricing />
         <About />
         <FAQ />
+        <LeadMagnet />
         <Contact />
       </main>
       <Footer />

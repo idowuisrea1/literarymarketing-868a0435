@@ -2,17 +2,44 @@ import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Play, X, Clapperboard } from "lucide-react";
 import { CATEGORIES, WORKS, type Work } from "@/data/site";
-import { Reveal, SectionHead, Tilt } from "./primitives";
+import { GlowButton, Reveal, SectionHead, Tilt } from "./primitives";
 import { cn } from "@/lib/utils";
 
+const PAGE = 9;
+
+/** Remove marketing extras from a YouTube title so only the book name stays. */
+export function cleanTitle(raw: string): string {
+  let t = raw.split("|")[0]!;
+  t = t.replace(/\b(official|cinematic|amazing|book|movie)?\s*(book\s*)?trailer(\s*(video|design))?\b/gi, "")
+    .replace(/\b(a|an)\s+(?=for\b)/gi, "").replace(/^\s*for\s+(the\s+)?/i, (m) => (/the/i.test(m) ? "The " : ""))
+    .replace(/\s+by\s+.+$/i, "").replace(/[-–:·]+\s*$/, "").replace(/\s+/g, " ").trim();
+  if (!t) return "";
+  return t === t.toUpperCase() ? t.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase()) : t;
+}
+
+function useTrailerTitle(w: Work) {
+  const [t, setT] = useState(w.title);
+  useEffect(() => {
+    if (!w.youtube || w.title) return;
+    let live = true;
+    fetch(`https://www.youtube.com/oembed?url=https://youtu.be/${w.youtube}&format=json`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d: { title?: string } | null) => { const c = d?.title ? cleanTitle(d.title) : ""; if (live) setT(c || "Book Trailer"); })
+      .catch(() => live && setT("Book Trailer"));
+    return () => { live = false; };
+  }, [w.youtube, w.title]);
+  return t || "Book Trailer";
+}
+
 function Card({ w, onOpen }: { w: Work; onOpen: () => void }) {
+  const title = useTrailerTitle(w);
   const thumb = w.youtube ? `https://i.ytimg.com/vi/${w.youtube}/hqdefault.jpg` : w.img;
   return (
     <Tilt>
       <button onClick={onOpen} disabled={!thumb} className="group relative block w-full overflow-hidden rounded-2xl border bg-card text-left disabled:cursor-default">
         <div className={cn("relative w-full overflow-hidden", w.youtube ? "aspect-video" : "aspect-[4/5]")}>
           {thumb ? (
-            <img src={thumb} alt={`${w.title} — ${w.cat}`} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img src={thumb} alt={`${title} — ${w.cat}`} width={480} height={w.youtube ? 270 : 600} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
           ) : (
             <div className="grid h-full w-full place-items-center bg-aurora"><Clapperboard className="h-10 w-10 text-gold/60" /></div>
           )}
@@ -23,7 +50,10 @@ function Card({ w, onOpen }: { w: Work; onOpen: () => void }) {
           )}
         </div>
         <div className="flex items-center justify-between gap-2 p-3">
-          <span className="min-w-0 truncate font-serif text-lg">{w.title}</span>
+          <div className="min-w-0">
+            <span className="block truncate font-serif text-lg">{title}</span>
+            {w.youtube && <span className="block truncate text-xs text-muted-foreground">{w.author ? `by ${w.author}` : "Book trailer"}</span>}
+          </div>
           <span className="shrink-0 font-mono text-[10px] uppercase text-cyan">{w.cat}</span>
         </div>
       </button>
@@ -34,7 +64,9 @@ function Card({ w, onOpen }: { w: Work; onOpen: () => void }) {
 export function Portfolio() {
   const [cat, setCat] = useState<(typeof CATEGORIES)[number]>("All");
   const [open, setOpen] = useState<Work | null>(null);
-  const items = useMemo(() => (cat === "All" ? WORKS : WORKS.filter((w) => w.cat === cat)), [cat]);
+  const [shown, setShown] = useState(PAGE);
+  const all = useMemo(() => (cat === "All" ? WORKS : WORKS.filter((w) => w.cat === cat)), [cat]);
+  const items = all.slice(0, shown);
   useEffect(() => {
     const k = (e: KeyboardEvent) => e.key === "Escape" && setOpen(null);
     window.addEventListener("keydown", k); return () => window.removeEventListener("keydown", k);
@@ -42,10 +74,10 @@ export function Portfolio() {
 
   return (
     <section id="portfolio" className="px-5 py-24">
-      <SectionHead eyebrow="02 · Portfolio" title={<>Work That <span className="text-gold-gradient">Sells Books</span></>} sub="Real trailers, spotlights, mockups and covers we made for authors." />
+      <SectionHead eyebrow="Portfolio" title={<>Work We Made <span className="text-gold-gradient">for Authors</span></>} sub="Selected creative work for authors." />
       <Reveal className="mx-auto mb-10 flex max-w-5xl gap-2 overflow-x-auto pb-2 sm:flex-wrap sm:justify-center">
         {CATEGORIES.map((c) => (
-          <button key={c} onClick={() => setCat(c)}
+          <button key={c} onClick={() => { setCat(c); setShown(PAGE); }}
             className={cn("min-h-11 shrink-0 rounded-full px-5 text-sm transition-all", c === cat ? "bg-gold-gradient text-primary-foreground" : "glass text-muted-foreground hover:text-foreground")}>
             {c}
           </button>
@@ -60,6 +92,12 @@ export function Portfolio() {
           ))}
         </AnimatePresence>
       </motion.div>
+      {shown < all.length && (
+        <div className="mt-10 text-center">
+          <GlowButton onClick={() => setShown((n) => n + PAGE)}>Load More</GlowButton>
+          <p className="mt-2 text-xs text-muted-foreground">Showing {items.length} of {all.length}</p>
+        </div>
+      )}
 
       <AnimatePresence>
         {open && (
@@ -68,12 +106,12 @@ export function Portfolio() {
             <motion.div initial={{ scale: 0.92 }} animate={{ scale: 1 }} exit={{ scale: 0.92 }} onClick={(e) => e.stopPropagation()} className="w-full max-w-4xl">
               {open.youtube ? (
                 <div className="aspect-video w-full overflow-hidden rounded-2xl border glow-gold">
-                  <iframe className="h-full w-full" src={`https://www.youtube-nocookie.com/embed/${open.youtube}?autoplay=1&rel=0`} title={open.title} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen />
+                  <iframe className="h-full w-full" src={`https://www.youtube-nocookie.com/embed/${open.youtube}?autoplay=1&rel=0`} title={open.title || "Book trailer"} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen />
                 </div>
               ) : (
                 <img src={open.img} alt={open.title} className="mx-auto max-h-[85vh] w-auto rounded-2xl border glow-gold" />
               )}
-              <p className="mt-4 text-center font-serif text-2xl">{open.title}</p>
+              {open.title && <p className="mt-4 text-center font-serif text-2xl">{open.title}</p>}
             </motion.div>
           </motion.div>
         )}

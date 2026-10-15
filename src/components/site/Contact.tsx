@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, MessageCircle, Phone, Camera as Instagram, Briefcase as Linkedin, PlayCircle as Youtube, AtSign as Twitter, Music2 } from "lucide-react";
 import { z } from "zod";
@@ -19,6 +19,11 @@ const leadSchema = z.object({
 export function Contact() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const [service, setService] = useState("");
+  useEffect(() => {
+    const on = (e: Event) => { const v = (e as CustomEvent<string>).detail; setService(SERVICES_LIST.includes(v) ? v : ""); setState((s) => (s === "done" ? "idle" : s)); };
+    window.addEventListener("lm:service", on); return () => window.removeEventListener("lm:service", on);
+  }, []);
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -33,7 +38,7 @@ export function Contact() {
 
   return (
     <section id="contact" className="relative px-5 py-24">
-      <SectionHead eyebrow="08 · Contact" title={<>Let's launch <span className="text-gold-gradient">your book</span></>} sub="Tell us about your book. We reply within 24 hours." />
+      <SectionHead eyebrow="Contact" title={<>Let's talk about <span className="text-gold-gradient">your book</span></>} sub="Send a short message. We reply within 24 hours." />
       <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_1.2fr]">
         <Reveal className="glass relative overflow-hidden rounded-3xl p-8">
           <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-cyan/10 blur-3xl" />
@@ -42,7 +47,7 @@ export function Contact() {
           <p className="mt-2 text-muted-foreground">Book a free 20-minute strategy call. We'll map out what your book needs, no pressure.</p>
           <div className="mt-6 flex flex-col gap-3">
             <GlowLink href={CONTACT.calendly} target="_blank" rel="noopener"><Phone className="h-4 w-4" /> Book a Free Strategy Call</GlowLink>
-            <GlowLink href={CONTACT.whatsapp} target="_blank" rel="noopener" variant="ghost"><MessageCircle className="h-4 w-4 text-whatsapp" /> Chat on WhatsApp</GlowLink>
+            <GlowLink href={CONTACT.whatsapp} target="_blank" rel="noopener" variant="ghost"><MessageCircle className="h-4 w-4 text-whatsapp" /> WhatsApp {CONTACT.whatsappDisplay}</GlowLink>
           </div>
         </Reveal>
         <Reveal delay={0.1} className="glass rounded-3xl p-6 sm:p-8">
@@ -58,7 +63,7 @@ export function Contact() {
               <div><input name="name" placeholder="Your name" aria-label="Your name" maxLength={120} className={fieldCls} />{errors["name"] && <p className="mt-1 text-xs text-destructive">{errors["name"]}</p>}</div>
               <div><input name="email" type="email" placeholder="Email address" aria-label="Email" maxLength={255} className={fieldCls} />{errors["email"] && <p className="mt-1 text-xs text-destructive">{errors["email"]}</p>}</div>
               <select name="genre" defaultValue="" aria-label="Book genre" className={fieldCls}><option value="" disabled>Book genre</option>{GENRES.map((g) => <option key={g}>{g}</option>)}</select>
-              <select name="service" defaultValue="" aria-label="Service needed" className={fieldCls}><option value="" disabled>Service needed</option>{SERVICES_LIST.map((g) => <option key={g}>{g}</option>)}</select>
+              <select name="service" value={service} onChange={(e) => setService(e.target.value)} aria-label="Service needed" className={fieldCls}><option value="" disabled>Service needed</option>{SERVICES_LIST.map((g) => <option key={g}>{g}</option>)}</select>
               <textarea name="details" rows={5} placeholder="Tell us about your book and goals" aria-label="Project details" maxLength={3000} className={`${fieldCls} sm:col-span-2`} />
               {state === "error" && <p className="text-sm text-destructive sm:col-span-2">Something went wrong. Please try again in a few minutes.</p>}
               <GlowButton type="submit" disabled={state === "sending"} className="sm:col-span-2">{state === "sending" ? "Sending…" : "Send Message"}</GlowButton>

@@ -3,7 +3,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Check, CheckCircle2, X } from "lucide-react";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
-import { GENRES, ORDER_OPTIONS, PACKAGES } from "@/data/site";
+import { GENRES, ONE_TIME, ORDER_OPTIONS, PACKAGES } from "@/data/site";
+import { PackageQuiz } from "./Quiz";
 import { GlowButton, Reveal, SectionHead, Tilt } from "./primitives";
 import { cn } from "@/lib/utils";
 
@@ -63,7 +64,7 @@ function OrderModal({ pkg, onClose }: { pkg: string; onClose: () => void }) {
               </div>
             ))}
             <select name="package" defaultValue={pkg} aria-label="Package" className={fieldCls}>
-              {ORDER_OPTIONS.map((o) => <option key={o}>{o}</option>)}
+              {(ORDER_OPTIONS.includes(pkg) ? ORDER_OPTIONS : [pkg, ...ORDER_OPTIONS]).map((o) => <option key={o}>{o}</option>)}
             </select>
             <select name="genre" defaultValue="" aria-label="Genre" className={fieldCls}>
               <option value="" disabled>Book genre</option>
@@ -83,7 +84,7 @@ export function Pricing() {
   const [pkg, setPkg] = useState<string | null>(null);
   return (
     <section id="pricing" className="px-5 py-24">
-      <SectionHead eyebrow="05 · Pricing" title={<>Simple, <span className="text-gold-gradient">transparent</span> plans</>} sub="Monthly packages. No long contracts. Cancel anytime." />
+      <SectionHead eyebrow="Pricing" title={<>Simple, <span className="text-gold-gradient">transparent</span> plans</>} sub="Pick a monthly plan, or pay once for a single project." />
       <div className="mx-auto grid max-w-6xl items-stretch gap-6 lg:grid-cols-3">
         {PACKAGES.map((p, i) => (
           <Reveal key={p.id} delay={i * 0.1} className="h-full">
@@ -103,11 +104,29 @@ export function Pricing() {
           </Reveal>
         ))}
       </div>
+      <Reveal className="mx-auto mt-24 max-w-6xl">
+        <div className="mb-8 text-center">
+          <h3 className="text-3xl font-semibold sm:text-4xl">One-Time <span className="text-gold-gradient">Projects</span></h3>
+          <p className="mt-2 text-muted-foreground">Pay once, own it forever.</p>
+        </div>
+        <div className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 lg:grid-cols-4">
+          {ONE_TIME.map((o) => (
+            <Tilt key={o.id} max={6}>
+              <div className="glass flex h-full flex-col rounded-2xl p-5 transition-shadow hover:glow-gold">
+                <p className="font-semibold">{o.name}</p>
+                <p className="mt-3 text-xs uppercase tracking-widest text-muted-foreground">Starting from</p>
+                <p className="font-serif text-3xl font-semibold text-gold-gradient">{o.from}</p>
+                <GlowButton variant="ghost" className="mt-4 w-full" onClick={() => setPkg(o.name)}>Get a Quote</GlowButton>
+              </div>
+            </Tilt>
+          ))}
+        </div>
+      </Reveal>
       <p className="mt-10 text-center text-sm text-muted-foreground">
-        Need an author website or something custom?{" "}
-        <button className="min-h-11 text-gold underline-offset-4 hover:underline" onClick={() => setPkg("Custom quote: Author Website")}>Get a custom quote →</button>
+        Need something custom?{" "}
+        <button className="min-h-11 text-gold underline-offset-4 hover:underline" onClick={() => setPkg("Custom quote: Other")}>Tell us what you need →</button>
       </p>
-      <p className="mt-1 text-center font-mono text-[10px] uppercase tracking-widest text-muted-foreground/70">Prices shown are placeholders</p>
+      <PackageQuiz onPick={(name) => setPkg(name)} />
       <AnimatePresence>{pkg && <OrderModal pkg={pkg} onClose={() => setPkg(null)} />}</AnimatePresence>
     </section>
   );
