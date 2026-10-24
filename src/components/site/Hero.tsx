@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Heart, Mail, Sparkles } from "lucide-react";
 import a from "@/assets/pf";
 import { GlowLink } from "./primitives";
-import { CONTACT } from "@/data/site";
+import { BOOKING_URL, CONTACT } from "@/data/site";
 
 const Book3D = lazy(() => import("./Book3D"));
 

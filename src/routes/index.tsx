@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { CONTACT } from "@/config/site";
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
 import { Services, AllServices } from "@/components/site/Services";
@@ -21,7 +22,18 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://literarymarketing.lovable.app/" },
     ],
+    links: [{ rel: "canonical", href: "https://literarymarketing.lovable.app/" }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org", "@type": "ProfessionalService",
+        name: "Literary Marketing", url: "https://literarymarketing.lovable.app/",
+        description: DESC, email: CONTACT.email, telephone: CONTACT.whatsappDisplay,
+        founder: { "@type": "Person", name: "Idowu Isreal Agboola" },
+      }),
+    }],
   }),
   component: Index,
 });

@@ -2,7 +2,7 @@ import { motion, useInView, animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { BookOpen, Compass, Infinity as Loop, Quote } from "lucide-react";
 import { GlowLink, Reveal, SectionHead, Tilt } from "./primitives";
-import { CONTACT } from "@/data/site";
+import { BOOKING_URL, CONTACT } from "@/data/site";
 
 const STEPS = [
   { icon: BookOpen, t: "The Manuscript Sync", d: "Connect your channels and tell us about your genre and book." },

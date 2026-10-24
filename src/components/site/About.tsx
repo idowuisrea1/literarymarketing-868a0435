@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Award, BookOpen, Users, Plus } from "lucide-react";
 import a from "@/assets/pf";
-import { CONTACT, FAQS } from "@/data/site";
+import { BOOKING_URL, CONTACT, FAQS } from "@/data/site";
 import { GlowLink, Reveal, SectionHead } from "./primitives";
 
 export function About() {

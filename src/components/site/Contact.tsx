@@ -4,7 +4,7 @@ import { CheckCircle2, Mail, MessageCircle, Phone, Camera as Instagram, Briefcas
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/pf/logo.png.asset.json";
-import { CONTACT, GENRES, SERVICES_LIST } from "@/data/site";
+import { BOOKING_URL, CONTACT, GENRES, SERVICES_LIST, isPlaceholder } from "@/data/site";
 import { GlowButton, GlowLink, Reveal, SectionHead } from "./primitives";
 import { fieldCls } from "./Pricing";
 
@@ -61,12 +61,12 @@ export function Contact() {
           ) : (
             <form onSubmit={submit} noValidate className="grid gap-3 sm:grid-cols-2">
               <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
-              <div><input name="name" placeholder="Your name" aria-label="Your name" maxLength={120} className={fieldCls} />{errors["name"] && <p className="mt-1 text-xs text-destructive">{errors["name"]}</p>}</div>
-              <div><input name="email" type="email" placeholder="Email address" aria-label="Email" maxLength={255} className={fieldCls} />{errors["email"] && <p className="mt-1 text-xs text-destructive">{errors["email"]}</p>}</div>
+              <div><input name="name" placeholder="Your name" aria-label="Your name" aria-invalid={!!errors["name"]} aria-describedby={errors["name"] ? "err-name" : undefined} maxLength={120} className={fieldCls} />{errors["name"] && <p id="err-name" role="alert" className="mt-1 text-xs text-destructive">{errors["name"]}</p>}</div>
+              <div><input name="email" type="email" placeholder="Email address" aria-label="Email" aria-invalid={!!errors["email"]} aria-describedby={errors["email"] ? "err-email" : undefined} maxLength={255} className={fieldCls} />{errors["email"] && <p id="err-email" role="alert" className="mt-1 text-xs text-destructive">{errors["email"]}</p>}</div>
               <select name="genre" defaultValue="" aria-label="Book genre" className={fieldCls}><option value="" disabled>Book genre</option>{GENRES.map((g) => <option key={g}>{g}</option>)}</select>
               <select name="service" value={service} onChange={(e) => setService(e.target.value)} aria-label="Service needed" className={fieldCls}><option value="" disabled>Service needed</option>{SERVICES_LIST.map((g) => <option key={g}>{g}</option>)}</select>
               <textarea name="details" rows={5} placeholder="Tell us about your book and goals" aria-label="Project details" maxLength={3000} className={`${fieldCls} sm:col-span-2`} />
-              {state === "error" && <p className="text-sm text-destructive sm:col-span-2">Something went wrong. Please try again in a few minutes.</p>}
+              {state === "error" && <p role="alert" className="text-sm text-destructive sm:col-span-2">Something went wrong. Please message us on <a href={CONTACT.whatsapp} target="_blank" rel="noopener" className="underline">WhatsApp</a> or email <a href={`mailto:${CONTACT.email}`} className="underline">{CONTACT.email}</a>.</p>}
               <GlowButton type="submit" disabled={state === "sending"} className="sm:col-span-2">{state === "sending" ? "Sending…" : "Send Message"}</GlowButton>
             </form>
           )}
@@ -100,6 +100,7 @@ function Newsletter() {
 export function Footer() {
   const S = CONTACT.socials;
   const icons = [[Instagram, S.instagram, "Instagram"], [Music2, S.tiktok, "TikTok"], [Twitter, S.x, "X"], [Linkedin, S.linkedin, "LinkedIn"], [Youtube, S.youtube, "YouTube"]] as const;
+  const live = icons.filter(([, href]) => !isPlaceholder(href));
   return (
     <footer className="border-t px-5 pb-28 pt-16 md:pb-12">
       <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1.2fr_1fr_1.2fr]">
@@ -107,12 +108,12 @@ export function Footer() {
           <img src={logo.url} alt="Literary Marketing logo" className="h-20 w-20 drop-shadow-[0_0_14px_oklch(0.76_0.13_85/0.45)]" loading="lazy" />
           <p className="mt-3 max-w-xs text-sm text-muted-foreground">Turning stories into social movements for authors, novelists and publishers.</p>
           <div className="mt-4 flex gap-1">
-            {icons.map(([I, href, l]) => <a key={l} href={href} target="_blank" rel="noopener" aria-label={l} className="grid h-11 w-11 place-items-center rounded-full transition-colors hover:text-gold"><I className="h-5 w-5" /></a>)}
+            {live.length > 0 && live.map(([I, href, l]) => <a key={l} href={href} target="_blank" rel="noopener" aria-label={l} className="grid h-11 w-11 place-items-center rounded-full transition-colors hover:text-gold"><I className="h-5 w-5" /></a>)}
           </div>
         </div>
         <nav aria-label="Footer" className="grid grid-cols-2 gap-2 text-sm">
-          {["services", "portfolio", "process", "pricing", "about", "faq", "contact"].map((id) => (
-            <a key={id} href={`#${id}`} className="py-2 capitalize text-muted-foreground hover:text-gold">{id}</a>
+          {([["Services","services"],["Portfolio","portfolio"],["Process","process"],["Pricing","pricing"],["About","about"],["FAQ","faq"],["Contact","contact"]] as const).map(([l, id]) => (
+            <a key={id} href={`#${id}`} className="py-2 text-muted-foreground hover:text-gold">{l}</a>
           ))}
         </nav>
         <div>
