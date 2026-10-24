@@ -15,7 +15,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
   return (
-    <div className="grain flex min-h-screen items-center justify-center bg-background px-5">
+    <div className="grain flex min-h-dvh items-center justify-center bg-background px-5">
       <div className="max-w-md text-center">
         <p className="font-mono text-xs uppercase tracking-[0.3em] text-cyan">Chapter missing</p>
         <h1 className="mt-3 font-serif text-8xl font-semibold text-gold-gradient">404</h1>
@@ -37,7 +37,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   }, [error]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="flex min-h-dvh items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
           This page didn't load

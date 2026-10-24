@@ -3,6 +3,7 @@ import a from "@/assets/pf";
 
 import { CONTACT, ONE_TIME, TRAILERS } from "@/config/site";
 export { CONTACT, ONE_TIME };
+export { BOOKING_URL, isPlaceholder } from "@/config/site";
 
 export type Pkg = { id: string; name: string; price: string; period: string; tagline: string; features: string[]; popular?: boolean };
 export const PACKAGES: Pkg[] = [

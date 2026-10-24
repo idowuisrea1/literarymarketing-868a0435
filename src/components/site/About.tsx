@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Award, BookOpen, Users, Plus } from "lucide-react";
 import a from "@/assets/pf";
-import { CONTACT, FAQS } from "@/data/site";
+import { BOOKING_URL, CONTACT, FAQS } from "@/data/site";
 import { GlowLink, Reveal, SectionHead } from "./primitives";
 
 export function About() {
@@ -31,7 +31,7 @@ export function About() {
           <p className="text-lg leading-relaxed text-foreground/90">
             I help authors turn books into brands by combining storytelling, marketing and technology. Every book has readers waiting for it. My job is to make sure they find it, fall in love with it and come back for the next one.
           </p>
-          <GlowLink href={CONTACT.calendly} target="_blank" rel="noopener" className="mt-8">Book a Call with Idowu</GlowLink>
+          <GlowLink href={BOOKING_URL} target="_blank" rel="noopener" className="mt-8">Book a Call with Idowu</GlowLink>
         </Reveal>
       </div>
     </section>

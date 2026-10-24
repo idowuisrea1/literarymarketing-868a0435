@@ -111,7 +111,7 @@ export function LeadMagnet() {
                   ))}
                 </ul>
                 <form onSubmit={sub} noValidate className="mt-5 grid gap-2">
-                  <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
+                  <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
                   <input name="email" type="email" required placeholder="Your email" aria-label="Email for checklist" className={fieldCls} />
                   {s === "error" && <p className="text-xs text-destructive">Please enter a valid email and try again.</p>}
                   <GlowButton type="submit" disabled={s === "sending"}>{s === "sending" ? "Sending…" : "Send Me the Checklist"}</GlowButton>

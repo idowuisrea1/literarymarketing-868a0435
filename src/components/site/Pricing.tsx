@@ -56,7 +56,7 @@ function OrderModal({ pkg, onClose }: { pkg: string; onClose: () => void }) {
           <form onSubmit={submit} noValidate className="space-y-3">
             <h3 className="text-3xl font-semibold">Order your package</h3>
             <p className="text-sm text-muted-foreground">No payment now. We confirm details first.</p>
-            <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
+            <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
             {([["name", "Your name"], ["email", "Email address"], ["book_title", "Book title (optional)"]] as const).map(([n, p]) => (
               <div key={n}>
                 <input name={n} type={n === "email" ? "email" : "text"} placeholder={p} aria-label={p} className={fieldCls} maxLength={n === "email" ? 255 : 200} />
