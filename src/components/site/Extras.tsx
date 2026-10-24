@@ -46,7 +46,7 @@ export function CaseStudy() {
     <section id="proof" className="px-5 py-24">
       <SectionHead eyebrow="Proof story" title={<>How We Make a Book <span className="text-gold-gradient">Impossible to Scroll Past</span></>} sub="One real project, start to finish." />
       <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-        <Reveal>
+        <Reveal className="lg:sticky lg:top-28 lg:self-start">
           <img src={a["sp-memoirs"]} alt="Book spotlight graphic for Memoirs of a Time Traveler" loading="lazy" decoding="async" width={600} height={750}
             className="mx-auto w-full max-w-md rounded-2xl border glow-gold animate-float" />
         </Reveal>
