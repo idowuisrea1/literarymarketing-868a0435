@@ -56,6 +56,9 @@ export function CinematicReel({ onOpen }: { onOpen: (work: (typeof WORKS)[number
   const content = (
     <motion.div
       ref={trackRef}
+      role={compact ? "region" : undefined}
+      aria-label={compact ? "Swipeable featured portfolio gallery" : undefined}
+      tabIndex={compact ? 0 : undefined}
       style={!compact && !reduce ? { x, backgroundColor: tint } : undefined}
       className={compact
         ? "flex w-full snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-5"
