@@ -3,9 +3,6 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { ArrowDown, ArrowLeft, ArrowRight, MoveHorizontal } from "lucide-react";
 import { WORKS } from "@/data/site";
 
-const cardWidth = 560;
-const gap = 24;
-
 /**
  * A real scroll-linked gallery built from the site's existing portfolio assets.
  * Desktop uses a pinned chapter sequence; touch/reduced-motion users get a
