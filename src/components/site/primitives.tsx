@@ -42,17 +42,39 @@ const variants = {
 };
 type V = keyof typeof variants;
 
-export function GlowButton({ variant = "gold", className, ...p }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: V }) {
-  return <button onMouseMove={track} className={cn(base, variants[variant], className)} {...p} />;
+function magneticMove(e: MouseEvent<HTMLElement>, reduced: boolean) {
+  track(e);
+  if (reduced || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  const rect = e.currentTarget.getBoundingClientRect();
+  const x = (e.clientX - rect.left) / rect.width - 0.5;
+  const y = (e.clientY - rect.top) / rect.height - 0.5;
+  e.currentTarget.style.transform = `translate3d(${x * 7}px, ${y * 5}px, 0)`;
 }
-export function GlowLink({ variant = "gold", className, ...p }: AnchorHTMLAttributes<HTMLAnchorElement> & { variant?: V }) {
-  return <a onMouseMove={track} className={cn(base, variants[variant], className)} {...p} />;
+
+export function GlowButton({ variant = "gold", className, onMouseMove, onMouseLeave, ...p }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: V }) {
+  const reduced = useReducedMotion();
+  return <button
+    {...p}
+    onMouseMove={(e) => { magneticMove(e, !!reduced); onMouseMove?.(e); }}
+    onMouseLeave={(e) => { e.currentTarget.style.transform = ""; onMouseLeave?.(e); }}
+    className={cn(base, variants[variant], className)}
+  />;
+}
+export function GlowLink({ variant = "gold", className, onMouseMove, onMouseLeave, ...p }: AnchorHTMLAttributes<HTMLAnchorElement> & { variant?: V }) {
+  const reduced = useReducedMotion();
+  return <a
+    {...p}
+    onMouseMove={(e) => { magneticMove(e, !!reduced); onMouseMove?.(e); }}
+    onMouseLeave={(e) => { e.currentTarget.style.transform = ""; onMouseLeave?.(e); }}
+    className={cn(base, variants[variant], className)}
+  />;
 }
 
 export function Tilt({ children, className, max = 10 }: { children: ReactNode; className?: string; max?: number }) {
   const ref = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
   const move = (e: MouseEvent<HTMLDivElement>) => {
-    const el = ref.current; if (!el) return;
+    const el = ref.current; if (!el || reduced || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     const r = el.getBoundingClientRect();
     const x = (e.clientX - r.left) / r.width - 0.5;
     const y = (e.clientY - r.top) / r.height - 0.5;
