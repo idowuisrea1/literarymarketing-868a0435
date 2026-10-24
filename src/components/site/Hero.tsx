@@ -67,7 +67,7 @@ export function Hero() {
           <motion.div initial={reduce ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.35 }}
             className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
             <GlowLink href="#pricing">Launch Your Campaign</GlowLink>
-            <GlowLink href={CONTACT.calendly} target="_blank" rel="noopener" variant="ghost">Book a Free Strategy Call</GlowLink>
+            <GlowLink href={BOOKING_URL} target="_blank" rel="noopener" variant="ghost">Book a Free Strategy Call</GlowLink>
           </motion.div>
         </div>
 

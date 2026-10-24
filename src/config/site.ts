@@ -48,3 +48,7 @@ export const TRAILERS: { url: string; title: string; author: string }[] = [
 
 // Case study result — replace with a real result when you have one.
 export const CASE_STUDY_RESULT = "[Add a real result, e.g. clicks, saves, sales]";
+
+// Until a real Calendly link is added above, "Book a Call" buttons open WhatsApp instead.
+export const isPlaceholder = (url: string) => url.includes("YOUR-");
+export const BOOKING_URL = isPlaceholder(CONTACT.calendly) ? CONTACT.whatsapp : CONTACT.calendly;

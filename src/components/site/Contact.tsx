@@ -46,7 +46,7 @@ export function Contact() {
           <h3 className="mt-4 text-3xl font-semibold">Prefer to talk first?</h3>
           <p className="mt-2 text-muted-foreground">Book a free 20-minute strategy call. We'll map out what your book needs, no pressure.</p>
           <div className="mt-6 flex flex-col gap-3">
-            <GlowLink href={CONTACT.calendly} target="_blank" rel="noopener"><Phone className="h-4 w-4" /> Book a Free Strategy Call</GlowLink>
+            <GlowLink href={BOOKING_URL} target="_blank" rel="noopener"><Phone className="h-4 w-4" /> Book a Free Strategy Call</GlowLink>
             <GlowLink href={CONTACT.whatsapp} target="_blank" rel="noopener" variant="ghost"><MessageCircle className="h-4 w-4 text-whatsapp" /> WhatsApp {CONTACT.whatsappDisplay}</GlowLink>
             <a href={`mailto:${CONTACT.email}`} className="flex min-h-11 items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-gold"><Mail className="h-4 w-4 shrink-0" /><span className="min-w-0 break-all">{CONTACT.email}</span></a>
           </div>
@@ -60,7 +60,7 @@ export function Contact() {
             </div>
           ) : (
             <form onSubmit={submit} noValidate className="grid gap-3 sm:grid-cols-2">
-              <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
+              <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
               <div><input name="name" placeholder="Your name" aria-label="Your name" maxLength={120} className={fieldCls} />{errors["name"] && <p className="mt-1 text-xs text-destructive">{errors["name"]}</p>}</div>
               <div><input name="email" type="email" placeholder="Email address" aria-label="Email" maxLength={255} className={fieldCls} />{errors["email"] && <p className="mt-1 text-xs text-destructive">{errors["email"]}</p>}</div>
               <select name="genre" defaultValue="" aria-label="Book genre" className={fieldCls}><option value="" disabled>Book genre</option>{GENRES.map((g) => <option key={g}>{g}</option>)}</select>
@@ -90,7 +90,7 @@ function Newsletter() {
   if (s === "done") return <p className="text-sm text-gold">You're on the list ✦</p>;
   return (
     <form onSubmit={sub} className="flex gap-2">
-      <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
+      <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       <input name="email" type="email" required placeholder="Your email" aria-label="Newsletter email" className={fieldCls} />
       <GlowButton type="submit" className="shrink-0 px-5">Join</GlowButton>
     </form>
@@ -135,7 +135,7 @@ export function FloatingBars() {
         <MessageCircle className="h-7 w-7" />
       </a>
       <div className="glass fixed inset-x-3 bottom-3 z-40 grid grid-cols-2 gap-2 rounded-full p-2 md:hidden">
-        <a href={CONTACT.calendly} target="_blank" rel="noopener" className="grid min-h-11 place-items-center rounded-full bg-gold-gradient text-sm font-semibold text-primary-foreground">Book a Call</a>
+        <a href={BOOKING_URL} target="_blank" rel="noopener" className="grid min-h-11 place-items-center rounded-full bg-gold-gradient text-sm font-semibold text-primary-foreground">Book a Call</a>
         <a href={CONTACT.whatsapp} target="_blank" rel="noopener" className="grid min-h-11 place-items-center rounded-full border text-sm font-semibold">WhatsApp</a>
       </div>
     </>

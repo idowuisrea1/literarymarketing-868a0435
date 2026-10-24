@@ -55,7 +55,7 @@ function Admin() {
 
   if (!data?.ok) {
     return (
-      <main className="grid min-h-screen place-items-center px-5">
+      <main className="grid min-h-dvh place-items-center px-5">
         <form onSubmit={login} className="glass w-full max-w-sm space-y-4 rounded-3xl p-8">
           <h1 className="text-3xl font-semibold">Admin</h1>
           <input name="password" type="password" placeholder="Password" aria-label="Password" className={fieldCls} />
