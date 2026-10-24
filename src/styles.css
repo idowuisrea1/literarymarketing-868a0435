@@ -268,3 +268,17 @@ img { image-rendering: auto; }
   .lm-pointer-atmosphere { display: none; }
   .lm-scroll-progress { box-shadow: none; }
 }
+
+
+/* Masked media reveals, atmospheric velocity and split-screen story pacing. */
+.lm-image-reveal {
+  clip-path: inset(4% 4% 4% 4% round 12px);
+  transition: clip-path 650ms cubic-bezier(.22, 1, .36, 1), transform 650ms cubic-bezier(.22, 1, .36, 1);
+}
+.group:hover .lm-image-reveal,
+.group:focus-visible .lm-image-reveal {
+  clip-path: inset(0 round 0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .lm-image-reveal { clip-path: none; transition: none; }
+}
