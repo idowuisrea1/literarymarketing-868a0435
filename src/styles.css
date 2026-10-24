@@ -332,3 +332,16 @@ img { image-rendering: auto; }
   .lm-fluid-hover::after { transition: none; }
   .lm-fluid-orb { animation: none; }
 }
+
+
+/* Editorial kinetic tracking: subtle breathing rhythm, never required for readability. */
+.hero-title {
+  animation: lm-title-tracking 8s ease-in-out infinite alternate;
+}
+@keyframes lm-title-tracking {
+  0% { letter-spacing: -0.055em; }
+  100% { letter-spacing: -0.035em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-title { animation: none; }
+}
