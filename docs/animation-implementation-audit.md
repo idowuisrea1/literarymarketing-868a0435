@@ -89,3 +89,15 @@ No new package dependency or third-party animation library was added.
 - Mobile, keyboard, reduced-motion, screen-reader and low-power-device checks: **not yet fully verified**.
 - Existing data flows and integrations: source-inspected, not end-to-end submitted during this pass.
 - GitHub branch/PR and Lovable sync/deployment: record the final state in the delivery report after those operations complete.
+
+
+## Repository, synchronization and deployment record
+
+- GitHub branch: `redesign/literarymarketing-motion-systems` (merged to `main`).
+- Pull request: [#2 — Extend Literarymarketing 2050 motion system across the site](https://github.com/idowuisrea1/literarymarketing-868a0435/pull/2).
+- Merge commit: `7db7cb7976fbc5d8a01a4a933a7003f09fd95c6a`.
+- Lovable project ID: `0f75a16d-fb8d-40ff-8416-9e923389b309`.
+- Lovable synchronization: **VERIFIED** — Lovable's `latest_commit_sha` matches the GitHub merge commit, and the new motion component and updated route/portfolio files are readable through the Lovable project.
+- Lovable publish/deployment: **PENDING / NOT CONFIRMED** — the publish request returned deployment ID `361d3a76-b8d4-49a7-a384-7db36e1b5b4c` with status `pending`. The project is marked published, but that alone does not prove this deployment completed. The web inspection tool could not access the live or preview URL, and no deployment-status endpoint was available.
+- GitHub Actions: no workflow runs were returned for the merge commit.
+- Build/type-check/lint/test status: **NOT RUN** — the available GitHub and Lovable connector tools exposed source reads and publishing, but no shell/build runner. No test result is claimed.
