@@ -76,8 +76,8 @@ export function CinematicReel({ onOpen }: { onOpen: (work: (typeof WORKS)[number
             whileHover={reduce || compact ? undefined : { y: -8, rotateY: -2, scale: 1.015 }}
             whileTap={{ scale: 0.985 }}
             className={compact
-              ? "group relative w-[78vw] max-w-[420px] shrink-0 snap-center overflow-hidden rounded-3xl border border-white/15 bg-card text-left"
-              : "group relative w-[min(68vw,560px)] shrink-0 overflow-hidden rounded-3xl border border-white/15 bg-card text-left"}
+              ? "lm-fluid-hover group relative w-[78vw] max-w-[420px] shrink-0 snap-center overflow-hidden rounded-3xl border border-white/15 bg-card text-left"
+              : "lm-fluid-hover group relative w-[min(68vw,560px)] shrink-0 overflow-hidden rounded-3xl border border-white/15 bg-card text-left"}
             aria-label={`View ${work.title || "featured book project"} in portfolio`}
           >
             <div className="relative aspect-[4/3] overflow-hidden">
@@ -87,7 +87,7 @@ export function CinematicReel({ onOpen }: { onOpen: (work: (typeof WORKS)[number
                   alt=""
                   loading="lazy"
                   decoding="async"
-                  className="h-full w-full object-cover"
+                  className="lm-cinematic-image h-full w-full object-cover"
                   initial={reduce ? false : { scale: 1.08, filter: "saturate(.72)" }}
                   whileInView={{ scale: 1, filter: "saturate(1)" }}
                   viewport={{ once: true, amount: 0.35 }}
