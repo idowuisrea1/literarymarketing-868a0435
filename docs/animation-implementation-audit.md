@@ -107,3 +107,12 @@ No new package dependency or third-party animation library was added.
 - GitHub Actions: quality workflow added (Bun install, build, lint, tests), but the connector returned no workflow runs or commit statuses for the PR head or merge commit. **No successful build/lint/test result is claimed.**
 - Production deployment: **NOT VERIFIED for the newest changes.** The project reports published, but the current build is not confirmed deployed. A new publish request and its result must be checked separately.
 - Browser QA: no automated desktop/mobile browser session or console inspection was available in this pass. Touch/reduced-motion behavior is implemented in code but not yet fully tested.
+
+
+## Final source-head addendum
+
+- After PR #3 merged, two small source refinements were committed directly to `main`: keyboard-focusable labelling for the touch gallery (`928613c8875568826a4f64e2e413f835f7952bec`) and reduced-motion-aware headline tracking (`5c7a3d059cf10f4abedc6300e90d248f6461f314`).
+- The scroll-video limitation was then clarified in this audit (`0db02ba61e623008597873de5d2bd495f9d767de`).
+- A final audit-only PR is being used to create a clean, reviewable synchronization point after those commits; it does not alter the site’s business data or remove content.
+- Current source contains the cinematic reel and all changes described above. The newest publish request returned deployment ID `06f8e11a-e759-48a7-a2bb-740ee04037ee` with status `pending`; that request was made while Lovable's reported commit was `89397c45f9e94081935557b170e09926f1a71da6`, before the later small refinements. The final deployment still needs a fresh publish after sync is confirmed.
+- Local build execution is blocked in this session because the container could not resolve `github.com` for a clone, and GitHub's workflow/status tools returned no runs or statuses. The CI workflow is committed, but a green result has not been observed.
