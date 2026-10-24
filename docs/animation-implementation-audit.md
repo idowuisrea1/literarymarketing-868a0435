@@ -116,3 +116,9 @@ No new package dependency or third-party animation library was added.
 - A final audit-only PR is being used to create a clean, reviewable synchronization point after those commits; it does not alter the site’s business data or remove content.
 - Current source contains the cinematic reel and all changes described above. The newest publish request returned deployment ID `5a369031-325b-446e-8308-59b3e79bde7d` with status `pending`, after Lovable's reported source commit advanced to `0db02ba61e623008597873de5d2bd495f9d767de`. That source commit includes the new cinematic reel, keyboard/touch refinement, and kinetic headline tracking. The hosting tool did not expose a deployment-status lookup, so completion remains unconfirmed.
 - Local build execution is blocked in this session because the container could not resolve `github.com` for a clone, and GitHub's workflow/status tools returned no runs or statuses. The CI workflow is committed, but a green result has not been observed.
+
+
+## Content preservation follow-up
+
+- Restored the original hero service description, “We Turn Stories into Social Movements” / “We Turn Readers into Superfans” messaging, and original CTA labels inside the cinematic redesign.
+- Restored the original service marquee labels (Book Trailers, BookTok, Email Funnels, Websites, Cover Design) alongside the newer thematic labels. The redesigned headline and visual treatment remain in place.
