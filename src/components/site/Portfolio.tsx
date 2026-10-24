@@ -33,15 +33,30 @@ function useTrailerTitle(w: Work) {
 
 function Card({ w, onOpen }: { w: Work; onOpen: () => void }) {
   const title = useTrailerTitle(w);
+  const reduce = useReducedMotion();
+  const [preview, setPreview] = useState(false);
   const thumb = w.youtube ? `https://i.ytimg.com/vi/${w.youtube}/hqdefault.jpg` : w.img;
   return (
     <Tilt>
-      <button onClick={onOpen} disabled={!thumb} className="group relative block w-full overflow-hidden rounded-2xl border bg-card text-left disabled:cursor-default">
+      <button onClick={onOpen}
+        onMouseEnter={() => { if (!reduce && window.matchMedia("(hover: hover) and (pointer: fine)").matches && w.youtube) setPreview(true); }}
+        onMouseLeave={() => setPreview(false)}
+        disabled={!thumb} className="group relative block w-full overflow-hidden rounded-2xl border bg-card text-left disabled:cursor-default">
         <div className={cn("relative w-full overflow-hidden", w.youtube ? "aspect-video" : "aspect-[4/5]")}>
           {thumb ? (
-            <img src={thumb} alt={`${title} — ${w.cat}`} width={480} height={w.youtube ? 270 : 600} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img src={thumb} alt={`${title} — ${w.cat}`} width={480} height={w.youtube ? 270 : 600} loading="lazy" decoding="async" className="lm-image-reveal h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
           ) : (
             <div className="grid h-full w-full place-items-center bg-aurora"><Clapperboard className="h-10 w-10 text-gold/60" /></div>
+          )}
+          {w.youtube && preview && (
+            <iframe
+              className="pointer-events-none absolute inset-0 h-full w-full"
+              src={`https://www.youtube-nocookie.com/embed/${w.youtube}?autoplay=1&mute=1&controls=0&loop=1&playlist=${w.youtube}&playsinline=1&rel=0`}
+              title={`${title} video preview`}
+              aria-hidden="true"
+              tabIndex={-1}
+              allow="autoplay; encrypted-media; picture-in-picture"
+            />
           )}
           {w.youtube && (
             <span className="absolute inset-0 grid place-items-center bg-background/30">
