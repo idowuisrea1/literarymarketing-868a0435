@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, MessageCircle, Phone, Camera as Instagram, Briefcase as Linkedin, PlayCircle as Youtube, AtSign as Twitter, Music2 } from "lucide-react";
+import { CheckCircle2, Mail, MessageCircle, Phone, Camera as Instagram, Briefcase as Linkedin, PlayCircle as Youtube, AtSign as Twitter, Music2 } from "lucide-react";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/pf/logo.png.asset.json";
@@ -48,6 +48,7 @@ export function Contact() {
           <div className="mt-6 flex flex-col gap-3">
             <GlowLink href={CONTACT.calendly} target="_blank" rel="noopener"><Phone className="h-4 w-4" /> Book a Free Strategy Call</GlowLink>
             <GlowLink href={CONTACT.whatsapp} target="_blank" rel="noopener" variant="ghost"><MessageCircle className="h-4 w-4 text-whatsapp" /> WhatsApp {CONTACT.whatsappDisplay}</GlowLink>
+            <a href={`mailto:${CONTACT.email}`} className="flex min-h-11 items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-gold"><Mail className="h-4 w-4 shrink-0" /><span className="min-w-0 break-all">{CONTACT.email}</span></a>
           </div>
         </Reveal>
         <Reveal delay={0.1} className="glass rounded-3xl p-6 sm:p-8">

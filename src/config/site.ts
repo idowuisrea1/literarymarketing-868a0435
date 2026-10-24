@@ -7,8 +7,8 @@ export const CONTACT = {
   whatsappDisplay: "+234 703 307 0181",
   // PLACEHOLDER: replace with your real Calendly booking link
   calendly: "https://calendly.com/YOUR-CALENDLY-LINK",
-  // PLACEHOLDER: replace with your real email address
-  email: "YOUR-EMAIL@example.com",
+  // Business contact email
+  email: "idowuisreal@literarymarketing.online",
   // PLACEHOLDERS: replace with your real social profile links
   socials: {
     instagram: "https://instagram.com/YOUR-HANDLE",
