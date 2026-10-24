@@ -234,3 +234,37 @@ img { image-rendering: auto; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior:auto !important; }
 }
+
+
+/* Global motion instrumentation: ambient pointer light + honest scroll progress. */
+:root {
+  --lm-scroll-progress: 0;
+  --lm-scroll-velocity: 0;
+  --lm-pointer-x: 50vw;
+  --lm-pointer-y: 35vh;
+}
+.lm-scroll-progress {
+  position: fixed;
+  inset: 0 auto auto 0;
+  z-index: 100;
+  width: 100%;
+  height: 2px;
+  pointer-events: none;
+  transform: scaleX(var(--lm-scroll-progress));
+  transform-origin: left center;
+  background: linear-gradient(90deg, #8b5cf6, #67e8f9 55%, #e9d5ff);
+  box-shadow: 0 0 18px rgba(103, 232, 249, .45);
+}
+.lm-pointer-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: calc(.08 + var(--lm-scroll-velocity) * .035);
+  background: radial-gradient(34rem circle at var(--lm-pointer-x) var(--lm-pointer-y), rgba(139, 92, 246, .12), transparent 72%);
+  mix-blend-mode: screen;
+}
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .lm-pointer-atmosphere { display: none; }
+  .lm-scroll-progress { box-shadow: none; }
+}
