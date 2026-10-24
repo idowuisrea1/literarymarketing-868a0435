@@ -98,41 +98,12 @@ No new package dependency or third-party animation library was added.
 
 ## Repository, synchronization and deployment record
 
-- GitHub branch: `redesign/literarymarketing-motion-systems` (merged to `main`).
-- Pull request: [#2 — Extend Literarymarketing 2050 motion system across the site](https://github.com/idowuisrea1/literarymarketing-868a0435/pull/2).
-- Merge commit: `7db7cb7976fbc5d8a01a4a933a7003f09fd95c6a`.
+- GitHub repository: `idowuisrea1/literarymarketing-868a0435`, default branch `main`.
+- Earlier motion-system PR: [#2](https://github.com/idowuisrea1/literarymarketing-868a0435/pull/2), merge commit `7db7cb7976fbc5d8a01a4a933a7003f09fd95c6a`.
+- Cinematic reel / quality workflow PR: [#3](https://github.com/idowuisrea1/literarymarketing-868a0435/pull/3), merged as `89397c45f9e94081935557b170e09926f1a71da6`.
+- Latest audit documentation update is made directly on `main`; see repository history for the current HEAD.
 - Lovable project ID: `0f75a16d-fb8d-40ff-8416-9e923389b309`.
-- Lovable synchronization: **VERIFIED** — Lovable's `latest_commit_sha` matches the GitHub merge commit, and the new motion component and updated route/portfolio files are readable through the Lovable project.
-- Lovable publish/deployment: **PENDING / NOT CONFIRMED** — the publish request returned deployment ID `361d3a76-b8d4-49a7-a384-7db36e1b5b4c` with status `pending`. The project is marked published, but that alone does not prove this deployment completed. The web inspection tool could not access the live or preview URL, and no deployment-status endpoint was available.
-- GitHub Actions: no workflow runs were returned for the merge commit.
-- Build/type-check/lint/test status: **NOT RUN** — the available GitHub and Lovable connector tools exposed source reads and publishing, but no shell/build runner. No test result is claimed.
-
-
-## Extended content-to-effect inventory
-
-| Route / section | Existing content preserved | Applied motion / interaction |
-|---|---|---|
-| `/` header + mobile drawer | Brand logo, desktop anchor navigation, mobile navigation and contact CTA | Sticky glass header, spring drawer, staggered menu items, magnetic CTA; reduced-motion support in shared primitives |
-| Hero | Existing service promise, CTAs, cover art, 3D book, marquee | Kinetic word reveal, actual React Three Fiber book, floating lights/particles, adaptive ambient field |
-| Why Authors Choose Us | All four value cards and their copy | Reveal and hover depth |
-| Services tabs | Existing three primary service tabs, descriptions, bullets and previews | Animated tab panel, staggered preview rows, active states |
-| Everything We Do | All eight service categories and chips | Staggered bento-style cards, hover depth, quote action |
-| Portfolio | Existing WORKS entries, categories, trailers, images, modal and load-more behavior | New pinned horizontal reel plus touch scroll-snap, existing 3D orbit, filterable grid, masked images, hover video previews and lightbox |
-| Case study | Existing Challenge / What we did / Result copy and original image | Sticky visual, staged reveals, organic animated light field |
-| Process | Existing three steps and booking CTA | Drawn progress line, staged cards, reveal animations |
-| Results / testimonials | Existing metric and testimonial content | Existing count-up / chart and reveal effects; source claims remain unchanged |
-| Pricing / order | Existing packages, features, one-time project options, order modal and validation | Tilted cards, staggered entrance, selected package and animated submission feedback |
-| About / FAQ | Existing founder content and FAQ copy | Reveals and accordion transitions |
-| Checklist | Existing 10-point author checklist and signup | Animated form/result transition and staggered checklist items |
-| Contact | Existing contact details, strategy call, WhatsApp, form and validation | Split-screen layout, field errors and success feedback transitions |
-| Footer / floating bars | Existing newsletter, social links and mobile CTAs | Hover/focus states and responsive layout |
-| `/admin` | Existing password gate, orders, leads and newsletter tables | Staggered dashboard sections; existing data flow preserved |
-| Not-found / error boundary | Existing recovery copy and navigation | Branded state; direct route/error recovery remains available |
-
-## Current verification status for this branch
-
-- Automated checks are configured in GitHub Actions, but results are not yet available.
-- No test files were found in the repository before this branch; a small unit suite was added for the existing title-cleaning helper.
-- Scroll-controlled frame-by-frame video remains not applicable/blocked by source media: portfolio films are external YouTube embeds and the repository contains no owned local video/frame sequence. Hover playback is implemented for eligible devices; reliable frame scrubbing needs a locally hosted optimized video or frame sequence.
-- Sound remains not applicable for this brand experience: no audio assets or sound-led interaction exists, and the site intentionally stays silent by default.
-- The freeform infinite canvas remains not applicable because the existing semantic portfolio is a filterable, keyboard-usable gallery; replacing it with a pan/zoom canvas would reduce accessibility without improving the content.
+- Lovable source visibility: **PARTIALLY VERIFIED** — reading the new `src/components/site/CinematicReel.tsx` and `.github/workflows/quality.yml` via the Lovable project using ref `main` returned the expected GitHub content. However, `get_project.latest_commit_sha` still reports the prior commit `7285b07dd5ac9fbe631959f93618b79f64f9f7dd`; metadata has not caught up, so full synchronization is not declared.
+- GitHub Actions: quality workflow added (Bun install, build, lint, tests), but the connector returned no workflow runs or commit statuses for the PR head or merge commit. **No successful build/lint/test result is claimed.**
+- Production deployment: **NOT VERIFIED for the newest changes.** The project reports published, but the current build is not confirmed deployed. A new publish request and its result must be checked separately.
+- Browser QA: no automated desktop/mobile browser session or console inspection was available in this pass. Touch/reduced-motion behavior is implemented in code but not yet fully tested.
