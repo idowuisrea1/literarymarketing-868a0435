@@ -47,8 +47,11 @@ export function CaseStudy() {
       <SectionHead eyebrow="Proof story" title={<>How We Make a Book <span className="text-gold-gradient">Impossible to Scroll Past</span></>} sub="One real project, start to finish." />
       <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
         <Reveal className="lg:sticky lg:top-28 lg:self-start">
-          <img src={a["sp-memoirs"]} alt="Book spotlight graphic for Memoirs of a Time Traveler" loading="lazy" decoding="async" width={600} height={750}
-            className="mx-auto w-full max-w-md rounded-2xl border glow-gold animate-float" />
+          <div className="relative isolate mx-auto w-full max-w-md">
+            <div aria-hidden="true" className="lm-fluid-orb absolute inset-[12%] -z-10 bg-violet-500/20 blur-3xl" />
+            <img src={a["sp-memoirs"]} alt="Book spotlight graphic for Memoirs of a Time Traveler" loading="lazy" decoding="async" width={600} height={750}
+              className="mx-auto w-full rounded-2xl border glow-gold animate-float" />
+          </div>
         </Reveal>
         <div>
           <div className="grid gap-4 md:grid-cols-3">
