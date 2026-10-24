@@ -74,10 +74,16 @@ export function Hero() {
             className="mx-auto mt-7 max-w-xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8 lg:mx-0">
             We engineer the worlds around your words — story-first marketing, immersive author websites and reader communities that keep growing long after the final page.
           </motion.p>
+          <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-slate-400 lg:mx-0">
+            Social media management, automated email marketing and stunning websites, built exclusively for authors, novelists and publishers.
+          </p>
+          <p className="mx-auto mt-3 max-w-xl text-sm font-medium leading-6 text-violet-100/90 lg:mx-0">
+            We turn stories into social movements. We turn readers into superfans.
+          </p>
           <motion.div initial={reduce ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.95, duration: 0.7 }}
             className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
-            <GlowLink href="#pricing">Build Your Book Universe <ArrowUpRight className="ml-2 inline h-4 w-4" /></GlowLink>
-            <GlowLink href={BOOKING_URL} target="_blank" rel="noopener" variant="ghost">Enter the Strategy Room <ArrowUpRight className="ml-2 inline h-4 w-4" /></GlowLink>
+            <GlowLink href="#pricing">Launch Your Campaign <ArrowUpRight className="ml-2 inline h-4 w-4" /></GlowLink>
+            <GlowLink href={BOOKING_URL} target="_blank" rel="noopener" variant="ghost">Book a Free Strategy Call <ArrowUpRight className="ml-2 inline h-4 w-4" /></GlowLink>
           </motion.div>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] uppercase tracking-[0.16em] text-slate-400 lg:justify-start">
             <span className="inline-flex items-center gap-2"><Orbit className="h-3.5 w-3.5 text-violet-300" /> Story-led strategy</span>
@@ -121,7 +127,7 @@ export function Hero() {
           <div className="overflow-hidden">
             <div className="flex w-max animate-marquee gap-7 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.2em] text-slate-300 sm:gap-10 sm:text-xs">
               {Array.from({ length: 4 }).flatMap((_, k) =>
-                ["Book trailers", "Reader ecosystems", "Email intelligence", "Author websites", "BookTok worlds"].map((t) => (
+                ["Book Trailers", "BookTok", "Email Funnels", "Websites", "Cover Design", "Reader ecosystems", "Email intelligence", "Author websites", "BookTok worlds"].map((t) => (
                   <span key={t + k} className="flex items-center gap-7 sm:gap-10">{t}<span className="text-violet-300">✦</span></span>
                 )),
               )}
