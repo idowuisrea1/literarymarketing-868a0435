@@ -22,12 +22,7 @@ function CssBook() {
 }
 
 function Counter98() {
-  const [n, setN] = useState(72);
-  useEffect(() => {
-    const t = setInterval(() => setN((v) => (v >= 98 ? 98 : v + 1)), 60);
-    return () => clearInterval(t);
-  }, []);
-  return <span className="font-mono text-2xl font-bold text-cyan">{n}%</span>;
+  return <span className="font-mono text-xl font-bold tracking-[0.18em] text-cyan">SYNC</span>;
 }
 
 const particles = [

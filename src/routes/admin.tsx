@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { getAdminData } from "@/lib/admin.functions";
-import { GlowButton } from "@/components/site/primitives";
+import { GlowButton, Reveal } from "@/components/site/primitives";
 import { fieldCls } from "@/components/site/Pricing";
 
 export const Route = createFileRoute("/admin")({
@@ -68,9 +68,15 @@ function Admin() {
   return (
     <main className="mx-auto max-w-7xl space-y-10 px-5 py-12">
       <h1 className="text-4xl font-semibold">Dashboard</h1>
-      <section><h2 className="mb-3 text-2xl">Orders ({data.orders.length})</h2><Table rows={data.orders} cols={["created_at", "name", "email", "package", "book_title", "genre", "message"]} /></section>
-      <section><h2 className="mb-3 text-2xl">Leads ({data.leads.length})</h2><Table rows={data.leads} cols={["created_at", "name", "email", "genre", "service", "details"]} /></section>
-      <section><h2 className="mb-3 text-2xl">Newsletter ({data.subscribers.length})</h2><Table rows={data.subscribers} cols={["created_at", "email"]} /></section>
+      <Reveal delay={0.04}>
+        <section><h2 className="mb-3 text-2xl">Orders ({data.orders.length})</h2><Table rows={data.orders} cols={["created_at", "name", "email", "package", "book_title", "genre", "message"]} /></section>
+      </Reveal>
+      <Reveal delay={0.12}>
+        <section><h2 className="mb-3 text-2xl">Leads ({data.leads.length})</h2><Table rows={data.leads} cols={["created_at", "name", "email", "genre", "service", "details"]} /></section>
+      </Reveal>
+      <Reveal delay={0.2}>
+        <section><h2 className="mb-3 text-2xl">Newsletter ({data.subscribers.length})</h2><Table rows={data.subscribers} cols={["created_at", "email"]} /></section>
+      </Reveal>
     </main>
   );
 }
