@@ -93,7 +93,7 @@ export function Portfolio() {
 
   return (
     <section id="portfolio" className="px-5 py-24">
-      <SectionHead eyebrow="Portfolio" title={<>Work We Made <span className="text-gold-gradient">for Authors</span></>} sub="Selected creative work for authors." />
+      <SectionHead kinetic eyebrow="Portfolio" title={<>Work We Made <span className="text-gold-gradient">for Authors</span></>} sub="Selected creative work for authors." />
       <CinematicReel onOpen={setOpen} />
       <Reveal className="mx-auto mb-10 flex max-w-5xl gap-2 overflow-x-auto pb-2 sm:flex-wrap sm:justify-center">
         {CATEGORIES.map((c) => (

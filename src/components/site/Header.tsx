@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/pf/logo.png.asset.json";
 import { GlowLink } from "./primitives";
+import { SoundToggle } from "./SoundToggle";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -38,6 +39,7 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
+          <SoundToggle />
           <GlowLink href="#contact" className="px-4 sm:px-6">Contact Us</GlowLink>
           <button onClick={() => setOpen(true)} className="grid h-11 w-11 place-items-center rounded-full glass lg:hidden" aria-label="Open menu">
             <Menu className="h-5 w-5" />
