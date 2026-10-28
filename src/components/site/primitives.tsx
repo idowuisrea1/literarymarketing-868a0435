@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useRef, type ReactNode, type MouseEvent, type ButtonHTMLAttributes, type AnchorHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
+import { KineticHeading } from "./KineticHeading";
 
 export function Reveal({ children, delay = 0, className }: { children: ReactNode; delay?: number; className?: string }) {
   const reduce = useReducedMotion();
@@ -17,11 +18,11 @@ export function Reveal({ children, delay = 0, className }: { children: ReactNode
   );
 }
 
-export function SectionHead({ eyebrow, title, sub }: { eyebrow: string; title: ReactNode; sub: string }) {
+export function SectionHead({ eyebrow, title, sub, kinetic = false }: { eyebrow: string; title: ReactNode; sub: string; kinetic?: boolean }) {
   return (
     <Reveal className="mx-auto mb-12 max-w-2xl text-center">
       <p className="font-mono text-xs uppercase tracking-[0.3em] text-cyan">{eyebrow}</p>
-      <h2 className="mt-3 text-4xl font-semibold leading-tight sm:text-5xl md:text-6xl">{title}</h2>
+      <h2 className="mt-3 text-4xl font-semibold leading-tight sm:text-5xl md:text-6xl">{kinetic ? <KineticHeading>{title}</KineticHeading> : title}</h2>
       <p className="mt-4 text-base text-muted-foreground sm:text-lg">{sub}</p>
       <motion.div className="hairline mx-auto mt-6 w-40 origin-center" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }} />
     </Reveal>
