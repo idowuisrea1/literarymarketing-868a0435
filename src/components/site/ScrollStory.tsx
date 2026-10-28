@@ -11,19 +11,19 @@ import a from "@/assets/pf";
  * screens get the same chapters as simple stacked blocks.
  */
 
-const CHAPTERS = [
+const CHAPTERS: { img: string; h: string; t: string }[] = [
   {
-    img: a["sp-memoirs"],
+    img: a["sp-memoirs"]!,
     h: "The hook",
     t: "A baseball signed in 1908 with ink that shouldn't exist — the story had to explain itself in seconds.",
   },
   {
-    img: a["sp-cloak"],
+    img: a["sp-cloak"]!,
     h: "The design",
     t: "One-glance spotlight graphics turn the hook into five scannable moments.",
   },
   {
-    img: a["sp-treaty"],
+    img: a["sp-treaty"]!,
     h: "The launch",
     t: "3D book and e-reader mockups with a clear 'Available on Amazon' call to action.",
   },

@@ -43,7 +43,7 @@ const FRAG = /* glsl */ `
 `;
 
 function RipplePlane({ src1, src2 }: { src1: string; src2: string }) {
-  const [tex1, tex2] = useLoader(TextureLoader, [src1, src2]);
+  const [tex1, tex2] = useLoader(TextureLoader, [src1, src2]) as [Texture, Texture];
   const { viewport } = useThree();
   const target = useRef({ progress: 0, strength: 0, pointer: new Vector2(0.5, 0.5) });
 

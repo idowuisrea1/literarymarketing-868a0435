@@ -73,7 +73,7 @@ export function CinematicReel({ onOpen }: { onOpen: (work: (typeof WORKS)[number
             key={work.id}
             type="button"
             onClick={() => onOpen(work)}
-            whileHover={reduce || compact ? undefined : { y: -8, rotateY: -2, scale: 1.015 }}
+            {...(reduce || compact ? {} : { whileHover: { y: -8, rotateY: -2, scale: 1.015 } })}
             whileTap={{ scale: 0.985 }}
             className={compact
               ? "lm-fluid-hover group relative w-[78vw] max-w-[420px] shrink-0 snap-center overflow-hidden rounded-3xl border border-white/15 bg-card text-left"
