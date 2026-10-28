@@ -58,7 +58,6 @@ export function KineticHeading({ children, className }: { children: ReactNode; c
     };
 
     window.addEventListener("pointermove", onMove, { passive: true });
-    el.addEventListener("pointerenter", () => liquid(true));
     const enter = () => liquid(true);
     el.addEventListener("pointerenter", enter);
     return () => {
