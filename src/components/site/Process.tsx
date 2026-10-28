@@ -2,6 +2,7 @@ import { motion, useInView, animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { BookOpen, Compass, Infinity as Loop, Quote } from "lucide-react";
 import { GlowLink, Reveal, SectionHead, Tilt } from "./primitives";
+import { MorphRing } from "./MorphDivider";
 import { BOOKING_URL, CONTACT } from "@/data/site";
 
 const STEPS = [
@@ -13,7 +14,7 @@ const STEPS = [
 export function Process() {
   return (
     <section id="process" className="px-5 py-24">
-      <SectionHead eyebrow="How it works" title={<>Three steps. <span className="text-gold-gradient">Zero stress.</span></>} sub="From first chat to a growing readership in about a week." />
+      <SectionHead kinetic eyebrow="How it works" title={<>Three steps. <span className="text-gold-gradient">Zero stress.</span></>} sub="From first chat to a growing readership in about a week." />
       <div className="relative mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
         <div className="absolute left-[16%] right-[16%] top-12 hidden h-px md:block">
           <motion.div className="h-full origin-left bg-gold-gradient" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 1.4, ease: "easeInOut" }} />
@@ -25,6 +26,7 @@ export function Process() {
           <Reveal key={s.t} delay={i * 0.15}>
             <div className="group relative flex gap-5 md:flex-col md:items-center md:text-center">
               <span className="relative z-10 grid h-24 w-24 shrink-0 place-items-center rounded-full glass transition-all duration-300 group-hover:glow-gold group-hover:scale-105">
+                <MorphRing delay={i * 0.2} className="absolute -inset-2 h-[7rem] w-[7rem] opacity-70" />
                 <s.icon className="h-9 w-9 text-gold transition-colors group-hover:text-cyan" />
                 <span className="absolute -right-1 -top-1 grid h-7 w-7 place-items-center rounded-full bg-gold-gradient font-mono text-xs text-primary-foreground">{i + 1}</span>
               </span>
