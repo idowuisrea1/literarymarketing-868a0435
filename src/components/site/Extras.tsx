@@ -8,6 +8,8 @@ import logo from "@/assets/pf/logo.png.asset.json";
 import { CASE_STUDY_RESULT } from "@/config/site";
 import { GlowButton, Reveal, SectionHead, openQuote } from "./primitives";
 import { fieldCls } from "./Pricing";
+import { ParticleLogo } from "./ParticleLogo";
+import { ScrollStory } from "./ScrollStory";
 
 const REASONS = [
   { i: BookOpen, t: "We only work with authors", d: "Books are all we do." },
@@ -65,6 +67,9 @@ export function CaseStudy() {
           </div>
           <GlowButton className="mt-8" onClick={() => openQuote("Graphic & Cover Design")}>Get a Spotlight Like This</GlowButton>
         </div>
+      </div>
+      <div className="mt-16">
+        <ScrollStory />
       </div>
     </section>
   );
@@ -143,12 +148,21 @@ export function LeadMagnet() {
 
 export function LogoLoader() {
   const [show, setShow] = useState(true);
-  useEffect(() => { const t = setTimeout(() => setShow(false), 700); return () => clearTimeout(t); }, []);
+  useEffect(() => { const t = setTimeout(() => setShow(false), 1400); return () => clearTimeout(t); }, []);
   return (
     <AnimatePresence>
       {show && (
-        <motion.div className="pointer-events-none fixed inset-0 z-[100] grid place-items-center bg-background" exit={{ opacity: 0 }} transition={{ duration: 0.4 }} aria-hidden>
-          <motion.img src={logo.url} alt="" width={96} height={96} className="h-24 w-24" initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.5 }} />
+        <motion.div
+          className="fixed inset-0 z-[100] grid cursor-pointer place-items-center bg-background"
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4 }}
+          onClick={() => setShow(false)}
+          role="button"
+          aria-label="Skip intro"
+          onKeyDown={(e) => (e.key === "Enter" || e.key === " " || e.key === "Escape") && setShow(false)}
+          tabIndex={0}
+        >
+          <ParticleLogo src={logo.url} alt="Literary Marketing logo" className="h-24 w-24" />
         </motion.div>
       )}
     </AnimatePresence>
